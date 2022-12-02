@@ -163,11 +163,13 @@ zone(6,X,Y) :- X =<3, Y > 3.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % combinaison/5(+X,+Y,+Joueur,-Note,+PoidsCombinaison)
-% Donne une note .
+% Donne une note en fonction du nombre de puissance 4 possibles depuis une position donné pour un joueur J .
 % Note s'unifie au score de la position.
 
 combinaison(X,Y,J,Note,Poids) :- 
-	Poids>0.
+	Poids>0,
+	calculLigne(X,Y,J,S1),calculColonne(X,Y,J,S2),calculDiagGaucheDroite(X,Y,J,S3),calculDiagDroiteGauche(X,Y,J,S4),
+	Note is S1+S2+S3+S4.
 
 %----------------------------------Modifications----------------------------------
 
@@ -238,9 +240,10 @@ calculDiagBasGauche(_,_,_,0,0) :- !.
 calculDiagBasGauche(X,_,_,0,_) :- X<0,!.
 calculDiagBasGauche(_,Y,_,0,_) :- Y<0,!.
 calculDiagBasGauche(X,Y,J,SDbg1,Cmp) :- decr(X,X1),decr(Y,Y1),decr(Cmp,Cmp1),calculDiagBasGauche(X1,Y1,J,SDbg,Cmp1),incr(SDbg,SDbg1).
+%----------------------------------Fin Modifications----------------------------------
+
+
 %%%%% gagneTestDirect %%%%%
-
-
 gagneTestDirect(X,Y,J) :-
 	gagneTestDirectLigne(X,Y,J).
 gagneTestDirect(X,Y,J) :-
