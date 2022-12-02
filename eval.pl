@@ -1,6 +1,6 @@
 ﻿%%%%%%%%%%%% eval.pl %%%%%%%%%%%%
 % Différentes fonctions d'évaluation pour le Puissance 4, toutes basées sur des heuristiques différentes.
-
+% Vérifier que les prédicats inscrits sont bien ceux qui sont nécessaires en public
 :- module(eval, [evalJeu/5, evalTest1/2, calculGauche/5, calculDroite/5, calculLigne/4, calculHaut/4, calculBas/5, calculColonne/4, calculDiagGaucheDroite/4, calculDiagDroiteGauche/4]).
 
 %%%%%%%%%%%%%%%%
