@@ -156,6 +156,7 @@ zone(4,X,Y) :- X > 4, Y > 3.
 zone(5,X,Y) :- X = 4, Y > 3.
 zone(6,X,Y) :- X =<3, Y > 3.
 
+%----------------------------------Modifications----------------------------------
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %			HEURISTIQUE PAR COMBINAISON
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -167,6 +168,8 @@ zone(6,X,Y) :- X =<3, Y > 3.
 
 combinaison(X,Y,J,Note,Poids) :- 
 	Poids>0.
+
+%----------------------------------Modifications----------------------------------
 
 %%% Calcul du nombre de puissance 4 possible en ligne %%%
 calculLigne(X,Y,J,Score) :-
