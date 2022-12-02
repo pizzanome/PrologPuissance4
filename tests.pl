@@ -4,6 +4,7 @@
 :- use_module(jeu).
 :- use_module(util).
 :- use_module(miniMax).
+:- use_module(eval).
 
 %%%%% Tests victoire (gagne) %%%%%
 
@@ -119,3 +120,120 @@ t_inserer_jeton2 :-
 	case(1,2, rouge),
 	case(2,1, jaune),
 	retractall(case(_,_,_)).
+
+
+%%%%% Tests calcul %%%%%
+t_calculGauche :-
+	t_calculGauche1,t_calculGauche2,t_calculGauche3.
+
+t_calculGauche1 :- 
+	calculGauche(1,0,jaune,2,3).
+
+t_calculGauche2 :- 
+	calculGauche(3,0,jaune,3,3).
+
+t_calculGauche3 :-
+	assert(case(1,0,rouge)),
+	calculGauche(2,0,jaune,1,3).
+
+t_calculDroite :-
+	t_calculDroite1,t_calculDroite2,t_calculDroite3.
+
+t_calculDroite1 :- 
+	calculDroite(5,0,jaune,2,3).
+
+t_calculDroite2 :- 
+	calculDroite(1,0,jaune,3,3).
+
+t_calculDroite3 :-
+	assert(case(4,0,rouge)),
+	calculDroite(2,0,jaune,2,3).
+
+t_calculLigne :-
+	t_calculLigne1,t_calculLigne2,t_calculLigne3,t_calculLigne4.
+
+t_calculLigne1 :-
+	calculLigne(0,0,jaune,1).
+
+t_calculLigne2 :-
+	calculLigne(6,0,jaune,1).
+
+t_calculLigne3 :-
+	calculLigne(1,0,jaune,2).
+
+t_calculLigne4 :-
+	assert(case(1,0,rouge)),
+	assert(case(2,0,jaune)),
+	calculLigne(3,0,jaune,2).
+
+t_calculHaut :-
+	t_calculHaut1,t_calculHaut2.
+
+t_calculHaut1 :-
+	calculHaut(0,1,3,3).
+
+t_calculHaut2 :-
+	calculHaut(0,4,2,3).
+
+t_calculBas :-
+	t_calculBas1,t_calculBas2,t_calculBas3.
+
+t_calculBas1 :-
+	calculBas(0,1,jaune,2,3).
+
+t_calculBas2 :-
+	calculBas(0,4,jaune,3,3).
+
+t_calculBas3 :-
+	assert(case(0,1,rouge)),
+	calculBas(0,2,jaune,1,3).
+
+t_calculColonne :-
+	t_calculColonne1,t_calculColonne2,t_calculColonne3.
+
+t_calculColonne1 :-
+	assert(case(0,0,rouge)),
+	calculColonne(0,3,jaune,2).
+
+t_calculColonne2 :-
+	calculColonne(0,0,jaune,1).
+
+t_calculColonne3 :-
+	assert(case(0,2,rouge)),
+	calculColonne(0,3,jaune,0).
+
+t_calculDiagGD :-
+	t_calculDiagGD1,t_calculDiagGD2,t_calculDiagGD3,t_calculDiagGD4.
+
+t_calculDiagGD1 :-
+	assert(case(4,1,rouge)),
+	calculDiagGaucheDroite(2,3,jaune,1).
+
+t_calculDiagGD2 :-
+	calculDiagGaucheDroite(1,2,jaune,1).
+
+t_calculDiagGD3 :-
+	calculDiagGaucheDroite(0,1,jaune,0).
+
+t_calculDiagGD4 :-
+	initJeu,
+	assert(case(5,0,rouge)),
+	calculDiagGaucheDroite(2,3,jaune,2).
+
+t_calculDiagDG :-
+	t_calculDiagDG1,t_calculDiagDG2,t_calculDiagDG3,t_calculDiagDG4.
+
+t_calculDiagDG1 :-
+	assert(case(1,1,rouge)),
+	calculDiagDroiteGauche(3,3,jaune,1).
+
+t_calculDiagDG2 :-
+	calculDiagDroiteGauche(4,1,jaune,1).
+
+t_calculDiagDG3 :-
+	calculDiagDroiteGauche(4,0,jaune,0).
+
+t_calculDiagDG4 :-
+	initJeu,
+	assert(case(0,0,rouge)),
+	calculDiagDroiteGauche(2,2,jaune,2).

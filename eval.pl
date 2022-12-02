@@ -1,7 +1,7 @@
 ﻿%%%%%%%%%%%% eval.pl %%%%%%%%%%%%
 % Différentes fonctions d'évaluation pour le Puissance 4, toutes basées sur des heuristiques différentes.
 
-:- module(eval, [evalJeu/5, evalTest1/2]).
+:- module(eval, [evalJeu/5, evalTest1/2, calculGauche/5, calculDroite/5, calculLigne/4, calculHaut/4, calculBas/5, calculColonne/4, calculDiagGaucheDroite/4, calculDiagDroiteGauche/4]).
 
 %%%%%%%%%%%%%%%%
 %% Inclusions %%
@@ -168,6 +168,73 @@ zone(6,X,Y) :- X =<3, Y > 3.
 combinaison(X,Y,J,Note,Poids) :- 
 	Poids>0.
 
+%%% Calcul du nombre de puissance 4 possible en ligne %%%
+calculLigne(X,Y,J,Score) :-
+	decr(X,X1),incr(X,X2),calculGauche(X1,Y,J,SGauche,3),calculDroite(X2,Y,J,SDroit,3),ScoreCalc is SGauche + SDroit-2,Score is max(ScoreCalc,0).
+
+%%% Calcul du nombre de case vide à gauche de la case %%%
+calculGauche(X,Y,J,0,_) :- ennemi(J,Adversaire),case(X,Y,Adversaire),!.
+calculGauche(_,_,_,0,0) :- !.
+calculGauche(X,_,_,0,_) :- X<0,!.
+calculGauche(X,Y,J,SGauche1,Cmp) :- decr(X,X1),decr(Cmp,Cmp1),calculGauche(X1,Y,J,SGauche,Cmp1),incr(SGauche,SGauche1).
+
+%%% Calcul du nombre de case vide à droite de la case %%%
+calculDroite(X,Y,J,0,_) :- ennemi(J,Adversaire),case(X,Y,Adversaire),!.
+calculDroite(_,_,_,0,0) :- !.
+calculDroite(X,_,_,0,_) :- X>6,!.
+calculDroite(X,Y,J,SDroite1,Cmp) :- incr(X,X1),decr(Cmp,Cmp1),calculDroite(X1,Y,J,SDroite,Cmp1),incr(SDroite,SDroite1).
+
+%%% Calcul du nombre de puissance 4 possible en colonne %%%
+calculColonne(X,Y,J,Score) :-
+	decr(Y,Y1),incr(Y,Y2),calculBas(X,Y1,J,SBas,3),calculHaut(X,Y2,SHaut,3),ScoreCalc is SHaut + SBas-2,Score is max(ScoreCalc,0).
+
+%%% Calcul du nombre de case vide en haut de la case %%%
+calculHaut(_,_,0,0) :- !.
+calculHaut(_,Y,0,_) :- Y>5,!.
+calculHaut(X,Y,SHaut1,Cmp) :- incr(Y,Y1),decr(Cmp,Cmp1),calculHaut(X,Y1,SHaut,Cmp1),incr(SHaut,SHaut1).
+
+%%% Calcul du nombre de case vide en bas de la case %%%
+calculBas(X,Y,J,0,_) :- ennemi(J,Adversaire),case(X,Y,Adversaire),!.
+calculBas(_,_,_,0,0) :- !.
+calculBas(_,Y,_,0,_) :- Y<0,!.
+calculBas(X,Y,J,SBas1,Cmp) :- decr(Y,Y1),decr(Cmp,Cmp1),calculBas(X,Y1,J,SBas,Cmp1),incr(SBas,SBas1).
+
+%%% Calcul du nombre de puissance 4 possible en colonne %%%
+calculDiagGaucheDroite(X,Y,J,Score) :-
+	decr(X,X1),incr(Y,Y1),incr(X,X2),decr(Y,Y2),calculDiagHautGauche(X1,Y1,J,SDhg,3),calculDiagBasDroite(X2,Y2,J,SDbd,3),ScoreCalc is SDhg + SDbd-2,Score is max(ScoreCalc,0).
+
+%%% Calcul du nombre de case vide dans la diagonale haut-gauche de la case %%%
+calculDiagHautGauche(X,Y,J,0,_) :- ennemi(J,Adversaire),case(X,Y,Adversaire),!.
+calculDiagHautGauche(_,_,_,0,0) :- !.
+calculDiagHautGauche(X,_,_,0,_) :- X<0,!.
+calculDiagHautGauche(_,Y,_,0,_) :- Y>5,!.
+calculDiagHautGauche(X,Y,J,SDhg1,Cmp) :- decr(X,X1),incr(Y,Y1),decr(Cmp,Cmp1),calculDiagHautGauche(X1,Y1,J,SDhg,Cmp1),incr(SDhg,SDhg1).
+
+%%% Calcul du nombre de case vide dans la diagonale bas-droite de la case %%%
+calculDiagBasDroite(X,Y,J,0,_) :- ennemi(J,Adversaire),case(X,Y,Adversaire),!.
+calculDiagBasDroite(_,_,_,0,0) :- !.
+calculDiagBasDroite(X,_,_,0,_) :- X>6,!.
+calculDiagBasDroite(_,Y,_,0,_) :- Y<0,!.
+calculDiagBasDroite(X,Y,J,SDbd1,Cmp) :- incr(X,X1),decr(Y,Y1),decr(Cmp,Cmp1),calculDiagBasDroite(X1,Y1,J,SDbd,Cmp1),incr(SDbd,SDbd1).
+
+
+%%% Calcul du nombre de puissance 4 possible en colonne %%%
+calculDiagDroiteGauche(X,Y,J,Score) :-
+	decr(X,X1),decr(Y,Y1),incr(X,X2),incr(Y,Y2),calculDiagBasGauche(X1,Y1,J,SDbg,3),calculDiagHautDroite(X2,Y2,J,SDhd,3),ScoreCalc is SDbg + SDhd-2,Score is max(ScoreCalc,0).
+
+%%% Calcul du nombre de case vide dans la diagonale haut-gauche de la case %%%
+calculDiagHautDroite(X,Y,J,0,_) :- ennemi(J,Adversaire),case(X,Y,Adversaire),!.
+calculDiagHautDroite(_,_,_,0,0) :- !.
+calculDiagHautDroite(X,_,_,0,_) :- X>6,!.
+calculDiagHautDroite(_,Y,_,0,_) :- Y>5,!.
+calculDiagHautDroite(X,Y,J,SDhd1,Cmp) :- incr(X,X1),incr(Y,Y1),decr(Cmp,Cmp1),calculDiagHautDroite(X1,Y1,J,SDhd,Cmp1),incr(SDhd,SDhd1).
+
+%%% Calcul du nombre de case vide dans la diagonale bas-droite de la case %%%
+calculDiagBasGauche(X,Y,J,0,_) :- ennemi(J,Adversaire),case(X,Y,Adversaire),!.
+calculDiagBasGauche(_,_,_,0,0) :- !.
+calculDiagBasGauche(X,_,_,0,_) :- X<0,!.
+calculDiagBasGauche(_,Y,_,0,_) :- Y<0,!.
+calculDiagBasGauche(X,Y,J,SDbg1,Cmp) :- decr(X,X1),decr(Y,Y1),decr(Cmp,Cmp1),calculDiagBasGauche(X1,Y1,J,SDbg,Cmp1),incr(SDbg,SDbg1).
 %%%%% gagneTestDirect %%%%%
 
 
