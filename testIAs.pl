@@ -46,6 +46,8 @@ runTest2(NbIterations,IA1,IA2) :-
 	NbIterationsParIA is NbIterations//2,
 
 	%Mise à zéro du temps écoulé pour les joueurs ainsi que leurs nombres de coups.
+	retractall(tempsJoueur(_,_)),
+	retractall(nbCoups(_,_)),
 	assert(tempsJoueur(IA1,0)),
 	assert(tempsJoueur(IA2,0)),
 	assert(nbCoups(IA1,0)),
@@ -80,6 +82,21 @@ runTest2(NbIterations,IA1,IA2) :-
 	close(Stream),
 	!.
 
+runTest3(NbIterations,IA1,IA2) :-
+		NbIterationsParIA is NbIterations//2,
+	
+		%Mise à zéro du temps écoulé pour les joueurs ainsi que leurs nombres de coups.
+		retractall(tempsJoueur(_,_)),
+		retractall(nbCoups(_,_)),
+		assert(tempsJoueur(IA1,0)),
+		assert(tempsJoueur(IA2,0)),
+		assert(nbCoups(IA1,0)),
+		assert(nbCoups(IA2,0)),
+	
+		runTestIAXEnPremier(NbIterationsParIA,IA1,IA2,0,NbFoisIA1GagneEnCommencant,0,NbFoisIA1PerdEnCommencant,0,NbEgaliteIA1),
+		runTestIAXEnPremier(NbIterationsParIA,IA2,IA1,0,NbFoisIA2GagneEnCommencant,0,NbFoisIA2PerdEnCommencant,0,NbEgaliteIA2),
+		!.
+
 %Run test with time(:Goal) to see the time it takes to run the test
 % runTestWithTime(NbIterations,IA1,IA2) :-
 % 	time(runTest(NbIterations,IA1,IA2)).
@@ -99,7 +116,48 @@ runTestForMean(NbIterations,IA1,IA2) :-
 	MeanTime is Time/NbIterations,
 	write('\nMean time for one game : '), write(MeanTime), write(' ms'), nl.
 
+runTestStat() :-
+	%lance pour chaque IA1 et IA2 le test avec 20 parties
+	% runTestWithTime(20,2,3),
+	% runTestWithTime(20,2,4),
+	% runTestWithTime(20,2,5),
+	% runTestWithTime(20,2,6),
+	% runTestWithTime(20,2,7),
+	% runTestWithTime(20,2,8).
+	runTestWithTime(20,3,4),
+	runTestWithTime(20,3,5),
+	runTestWithTime(20,3,6),
+	runTestWithTime(20,3,7),
+	runTestWithTime(20,3,8).
+
+%Run test with statistics(:Goal) and shown the output of the statistics : thread_cputime, cputime, trail, process_epoch, memory into the result.txt
+runTestWithTime(NbIterations,IA1,IA2) :-
+	%ouverture fichier et initialisation message
+	open('timeT.txt',append,Stream),
+
+	statistics,
+	statistics(walltime, [Start,_]),
+	runTest3(NbIterations,IA1,IA2),
+	statistics(walltime, [End,_]),
+	Time is End - Start,
 	
+	%calcul du temps moyen par coups
+	tempsJoueur(IA1, TempsIA1),
+	tempsJoueur(IA2, TempsIA2),
+	nbCoups(IA1, NbCoupsIA1),
+	nbCoups(IA2, NbCoupsIA2),
+	MeanTimeIA1 is TempsIA1/NbCoupsIA1,
+	MeanTimeIA2 is TempsIA2/NbCoupsIA2,
+
+	typeJoueur(IA1,TypeIA1),
+	typeJoueur(IA2,TypeIA2),
+
+	write(Stream, TypeIA1), write(Stream, " : "), write(Stream, MeanTimeIA1), write(Stream, " ms\n"),
+	write(Stream, NbCoupsIA1), write(Stream, " coups comptabilisés\n"),
+	write(Stream, TypeIA2), write(Stream, " : "), write(Stream, MeanTimeIA2), write(Stream, " ms\n"),
+	write(Stream, NbCoupsIA2), write(Stream, " coups comptabilisés\n\n"),
+	close(Stream).
+
 %Run test with statistics(:Goal) and shown the output of the statistics : thread_cputime, cputime, trail, process_epoch, memory into the result.txt
 runTestWithStatisticsShort(NbIterations,IA1,IA2) :-
 	%ouverture fichier et initialisation message
@@ -118,6 +176,7 @@ runTestWithStatisticsShort(NbIterations,IA1,IA2) :-
 	runTest2(NbIterations,IA1,IA2),
 	statistics(walltime, [End,_]),
 	Time is End - Start,
+
 	%calcul du temps moyen par coups
 	tempsJoueur(IA1, TempsIA1),
 	tempsJoueur(IA2, TempsIA2),

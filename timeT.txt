@@ -1,0 +1,55 @@
+IA Aléatoire : 0.015503875968992248 ms
+129 coups comptabilisés
+IA Minimax 3 - eval Position : 40.064748201438846 ms
+139 coups comptabilisés
+
+IA Aléatoire : 0.02054794520547945 ms
+146 coups comptabilisés
+IA Minimax 3 - eval Position+Puissance3 : 38.23717948717949 ms
+156 coups comptabilisés
+
+IA Aléatoire : 0.021052631578947368 ms
+95 coups comptabilisés
+IA Minimax 4 - eval Position : 597.5714285714286 ms
+105 coups comptabilisés
+
+IA Aléatoire : 0.010309278350515464 ms
+97 coups comptabilisés
+IA Minimax 4 - eval Position+Puissance3 : 629.1682242990654 ms
+107 coups comptabilisés
+
+IA Aléatoire : 0 ms
+123 coups comptabilisés
+IA Minimax 3 - eval combinaison : 30.827067669172934 ms
+133 coups comptabilisés
+
+IA Aléatoire : 0.008064516129032258 ms
+124 coups comptabilisés
+IA Minimax 4 - eval combinaison : 567.4850746268656 ms
+134 coups comptabilisés
+
+IA Minimax 3 - eval Position : 31.17472118959108 ms
+269 coups comptabilisés
+IA Minimax 3 - eval Position+Puissance3 : 29.3125 ms
+272 coups comptabilisés
+
+IA Minimax 3 - eval Position : 27.59765625 ms
+256 coups comptabilisés
+IA Minimax 4 - eval Position : 322.9128787878788 ms
+264 coups comptabilisés
+
+IA Minimax 3 - eval Position : 25.603636363636365 ms
+275 coups comptabilisés
+IA Minimax 4 - eval Position+Puissance3 : 295.2607142857143 ms
+280 coups comptabilisés
+
+IA Minimax 3 - eval Position : 29.619217081850532 ms
+281 coups comptabilisés
+IA Minimax 3 - eval combinaison : 28.473118279569892 ms
+279 coups comptabilisés
+
+IA Minimax 3 - eval Position : 28.759336099585063 ms
+241 coups comptabilisés
+IA Minimax 4 - eval combinaison : 353.40485829959516 ms
+247 coups comptabilisés
+
