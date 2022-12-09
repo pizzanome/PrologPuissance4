@@ -175,6 +175,7 @@ obtenirCoup(CouleurJCourant,5,Coup) :-
     iaMinimax(CouleurJCourant,Coup,4,1,0,0,0,0).
 obtenirCoup(CouleurJCourant,6,Coup) :-
     iaMinimax(CouleurJCourant,Coup,4,1,1,0,0,0).
+
 %%%% Nouvelles IA utilisants l'heuristique ajouté %%%% 
 obtenirCoup(CouleurJCourant,7,Coup) :-
     iaMinimax(CouleurJCourant,Coup,3,0,0,0,0,1).

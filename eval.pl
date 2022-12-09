@@ -172,7 +172,7 @@ combinaison(X,Y,J,Note,Poids) :-
 	Poids>0,
 	calculLigne(X,Y,J,S1),calculColonne(X,Y,J,S2),calculDiagGaucheDroite(X,Y,J,S3),calculDiagDroiteGauche(X,Y,J,S4),
 	Note is S1+S2+S3+S4.
-
+combinaison(_,_,_,0,_).
 %----------------------------------Modifications----------------------------------
 
 %%% Calcul du nombre de puissance 4 possible en ligne %%%

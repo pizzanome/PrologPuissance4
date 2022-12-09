@@ -30,3 +30,15 @@ Execution Time : 1995 ms.
 Nb de thread actifs : 2
 CpuTime : 140.5755866 s
 
+Exécution du test avec les statistiques suivantes : 
+Match de IA1 : IA Aléatoire contre IA2 : IA Aléatoire
+IA Aléatoire en commençant : a gagné 0 fois et a perdu 2 fois.
+IA Aléatoire en commençant : a gagné 1 fois et a perdu 1 fois.
+Il y a eu 0 égalites pour IA2
+Il y a eu 0 egalites pour IA1
+Temps moyen par coups pour IA1 : 0.01904761904761905 ms
+Temps moyen par coups pour IA2 : 0.01904761904761905 ms
+Execution Time : 5 ms.
+Nb de thread actifs : 2
+CpuTime : 0.4718631 s
+
