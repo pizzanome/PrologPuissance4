@@ -237,3 +237,12 @@ t_calculDiagDG4 :-
 	initJeu,
 	assert(case(0,0,rouge)),
 	calculDiagDroiteGauche(2,2,jaune,2).
+
+t_combinaison :-
+	t_combinaison1, t_combinaison2.
+
+t_combinaison1 :-
+	combinaison(0,0,jaune,3,1).
+
+t_combinaison2 :-
+	combinaison(3,2,jaune,13,1).
