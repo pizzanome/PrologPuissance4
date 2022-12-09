@@ -46,7 +46,7 @@ runTest2(NbIterations,IA1,IA2) :-
 	runTestIAXEnPremier(NbIterationsParIA,IA2,IA1,0,NbFoisIA2GagneEnCommencant,0,NbFoisIA2PerdEnCommencant,0,NbEgaliteIA2),
 	typeJoueur(IA1,TypeIA1),
 	typeJoueur(IA2,TypeIA2),
-	open('result.txt',append,Stream),
+	open('result2.txt',append,Stream),
 
 	write(Stream,'Exécution du test avec les statistiques suivantes : '),
 	%description de l'IA1 et de l'IA2
@@ -77,7 +77,8 @@ runTest2(NbIterations,IA1,IA2) :-
 runTestWithTimeForMean(NbIterations,IA1,IA2) :-
 	time(runTestForMean(NbIterations,IA1,IA2)).
 	
-%Run test with two similar IAs to find the mean time it takes to play a game
+% Run test with two similar IAs to find the mean time it takes to play a game
+% Pour l'instant, c'est juste le temps moyen d'une IA, il faut faire le temps au cours d'une partie pour chaque IA
 runTestForMean(NbIterations,IA1,IA2) :-
 	statistics,
 	statistics(walltime, [Start,_]),
@@ -85,13 +86,13 @@ runTestForMean(NbIterations,IA1,IA2) :-
 	statistics(walltime, [End,_]),
 	Time is End - Start,
 	MeanTime is Time/NbIterations,
-	write('Mean time for one game : '), write(MeanTime), write(' ms'), nl.
+	write('\nMean time for one game : '), write(MeanTime), write(' ms'), nl.
 
 	
 %Run test with statistics(:Goal) and shown the output of the statistics : thread_cputime, cputime, trail, process_epoch, memory into the result.txt
 runTestWithStatisticsShort(NbIterations,IA1,IA2) :-
 	%ouverture fichier et initialisation message
-	open('result.txt',append,Stream),
+	open('result2.txt',append,Stream),
 	% write(Stream,'Exécution du test avec les statistiques suivantes : '),
 	% %description de l'IA1 et de l'IA2
 	% write(Stream,'\nMatch de IA1 : '),
@@ -146,22 +147,22 @@ runTestWithStatisticsShort(NbIterations,IA1,IA2) :-
 %%%%%%%%%%%%%%%%%%%%%%
 
 % test de sortie de runTestIAXEnPremier
-runTestIAXEnPremier(0,_,_,NbIA1GagneIni,NbIA1GagneIni,NbIA2GagneIni,NbIA2GagneIni, NbDrawIni, NbDrawFin) :- !.
+runTestIAXEnPremier(0,_,_,NbIA1GagneIni,NbIA1GagneIni,NbIA2GagneIni,NbIA2GagneIni, NbDrawIni, NbDrawIni) :- !.
 runTestIAXEnPremier(NbIterations,IA1,IA2,NbIA1GagneIni,NbIA1GagneFin,NbIA2GagneIni,NbIA2GagneFin, NbDrawIni, NbDrawFin) :-
 	init,
 	assert(joueurCourant(rouge,IA1)), % rouge = IA1
 	assert(autreJoueur(jaune,IA2)),
 	jeu(PartieNulle),
 	joueurCourant(CouleurIAGagnante,_),
-	incrementerGagnant(PartieNulle,CouleurIAGagnante,NbIA1GagneIni,NbIA1GagneFin1,NbIA2GagneIni,NbIA2GagneFin1, NbDrawIni, NbDrawFin),
+	incrementerGagnant(PartieNulle,CouleurIAGagnante,NbIA1GagneIni,NbIA1GagneFin1,NbIA2GagneIni,NbIA2GagneFin1, NbDrawIni, NbDrawFin1),
 	NbIterations2 is NbIterations-1,
-	runTestIAXEnPremier(NbIterations2,IA1,IA2,NbIA1GagneFin1,NbIA1GagneFin,NbIA2GagneFin1,NbIA2GagneFin, NbDrawIni, NbDrawFin).
+	runTestIAXEnPremier(NbIterations2,IA1,IA2,NbIA1GagneFin1,NbIA1GagneFin,NbIA2GagneFin1,NbIA2GagneFin, NbDrawFin1, NbDrawFin).
 
 incrementerGagnant(true,_,NbIA1GagneIni,NbIA1GagneIni,NbIA2GagneIni,NbIA2GagneIni, NbDrawIni, NbDrawFin) :-
 	NbDrawFin is NbDrawIni+1.
-incrementerGagnant(false,rouge,NbIA1GagneIni,NbIA1GagneFin,NbIA2GagneIni,NbIA2GagneIni, NbDrawIni, NbDrawFin) :-
+incrementerGagnant(false,rouge,NbIA1GagneIni,NbIA1GagneFin,NbIA2GagneIni,NbIA2GagneIni, NbDrawIni, NbDrawIni) :-
 	NbIA1GagneFin is NbIA1GagneIni+1.
-incrementerGagnant(false,jaune,NbIA1GagneIni,NbIA1GagneIni,NbIA2GagneIni,NbIA2GagneFin, NbDrawIni, NbDrawFin) :-
+incrementerGagnant(false,jaune,NbIA1GagneIni,NbIA1GagneIni,NbIA2GagneIni,NbIA2GagneFin, NbDrawIni, NbDrawIni) :-
 	NbIA2GagneFin is NbIA2GagneIni+1.
 
 jeu(PartieNulle) :-

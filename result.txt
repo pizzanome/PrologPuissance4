@@ -1,24 +1,8 @@
-IA Minimax 3 - eval Position+Puissance3 en commençant : a gagné 1 fois et a perdu 2 fois.
-IA Minimax 3 - eval Position en commençant : a gagné 2 fois et a perdu 1 fois.
-Exécution du test avec les statistiques suivantes : 
-Match de IA1 : IA Minimax 3 - eval Position contre IA2 : IA Minimax 3 - eval Position+Puissance3
-Execution Time : 12777 ms.
-Nb de thread actifs : 2
-CpuTime : 738.8014676 s
-
-Exécution du test avec les statistiques suivantes : 
-Match de IA1 : IA Minimax 3 - eval Position contre IA2 : IA Minimax 3 - eval Position+Puissance3IA Minimax 3 - eval Position+Puissance3 en commençant : a gagné 1 fois et a perdu 2 fois.
-IA Minimax 3 - eval Position en commençant : a gagné 2 fois et a perdu 1 fois.
-
-Execution Time : 12795 ms.
-Nb de thread actifs : 2
-CpuTime : 751.6340616 s
-
 Exécution du test avec les statistiques suivantes : 
 Match de IA1 : IA Minimax 3 - eval Position contre IA2 : IA Minimax 3 - eval Position+Puissance3
 IA Minimax 3 - eval Position+Puissance3 en commençant : a gagné 1 fois et a perdu 2 fois.
-IA Minimax 3 - eval Position en commençant : a gagné 2 fois et a perdu 1 fois.
-Execution Time : 13858 ms.
+IA Minimax 3 - eval Position en commençant : a gagné 2 fois et a perdu 0 fois.
+Execution Time : 3938 ms.
 Nb de thread actifs : 2
-CpuTime : 765.5235526 s
+CpuTime : 18.9856217 s
 
