@@ -21,6 +21,7 @@
 % evalJeu/5(+JoueurCourant, +AutreJoueur, +X, +Y, -Score)
 % Évalue la situation courante pour le joueur JoueurCourant étant donné que le dernier coup joué fut joué en (X,Y). Le score est pondéré par les différentes pondérations données en entrée (par assert) à evalJeu. Le score est ensuite perturbé par une valeur aléatoire, permettant de casser le caractère déterministe de l'IA.
 % Score s'unifie avec le score évalué pour la position courante.
+%% AJOUT : utilisation de la nouvelle heuristique
 evalJeu(JoueurCourant,AutreJoueur,X,Y,Score) :-
 	assert(caseTest(X,Y,JoueurCourant)),
 	assert(ennemiTest(AutreJoueur)),
@@ -158,7 +159,7 @@ zone(4,X,Y) :- X > 4, Y > 3.
 zone(5,X,Y) :- X = 4, Y > 3.
 zone(6,X,Y) :- X =<3, Y > 3.
 
-%----------------------------------Modifications----------------------------------
+%----------------------------------AJOUTS----------------------------------
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %			HEURISTIQUE PAR COMBINAISON
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -173,7 +174,6 @@ combinaison(X,Y,J,Note,Poids) :-
 	calculLigne(X,Y,J,S1),calculColonne(X,Y,J,S2),calculDiagGaucheDroite(X,Y,J,S3),calculDiagDroiteGauche(X,Y,J,S4),
 	Note is S1+S2+S3+S4.
 combinaison(_,_,_,0,_).
-%----------------------------------Modifications----------------------------------
 
 %%% Calcul du nombre de puissance 4 possible en ligne %%%
 calculLigne(X,Y,J,Score) :-
@@ -242,7 +242,7 @@ calculDiagBasGauche(_,_,_,0,0) :- !.
 calculDiagBasGauche(X,_,_,0,_) :- X<0,!.
 calculDiagBasGauche(_,Y,_,0,_) :- Y<0,!.
 calculDiagBasGauche(X,Y,J,SDbg1,Cmp) :- decr(X,X1),decr(Y,Y1),decr(Cmp,Cmp1),calculDiagBasGauche(X1,Y1,J,SDbg,Cmp1),incr(SDbg,SDbg1).
-%----------------------------------Fin Modifications----------------------------------
+%----------------------------------Fin AJOUTS----------------------------------
 
 
 %%%%% gagneTestDirect %%%%%
