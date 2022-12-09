@@ -24,11 +24,12 @@
 evalJeu(JoueurCourant,AutreJoueur,X,Y,Score) :-
 	assert(caseTest(X,Y,JoueurCourant)),
 	assert(ennemiTest(AutreJoueur)),
-	poidsPuissance3(PoidsPuissance3), poidsPosition(PoidsPosition), poidsDensite(PoidsDensite), poidsAdjacence(PoidsAdjacence),
+	poidsPuissance3(PoidsPuissance3), poidsPosition(PoidsPosition), poidsDensite(PoidsDensite), poidsAdjacence(PoidsAdjacence),poidsCombinaison(PoidsCombinaison),
 	evalPosition(JoueurCourant,Score1,PoidsPosition),
 	evalPuissances3(JoueurCourant,AutreJoueur,Score2,PoidsPuissance3),
 	densite(JoueurCourant,Score3,PoidsDensite),
 	evalAdjacence(X,Y,_,Score4, PoidsAdjacence),
+	combinaison(X,Y,JoueurCourant,Score5,PoidsCombinaison),
 	retract(caseTest(X,Y,JoueurCourant)),
 	retract(ennemiTest(AutreJoueur)),
 	random_between(-2,2,Perturbation),
@@ -36,6 +37,7 @@ evalJeu(JoueurCourant,AutreJoueur,X,Y,Score) :-
 			+ Score2 * PoidsPuissance3
 			+ Score3
 			+ Score4
+			+ Score5 * PoidsCombinaison
 			+ Perturbation.
 
 %%%%%%%%%%%%%%%%%%%%%%
