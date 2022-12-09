@@ -1,7 +1,7 @@
 ﻿%%%%%%%%%%%% eval.pl %%%%%%%%%%%%
 % Différentes fonctions d'évaluation pour le Puissance 4, toutes basées sur des heuristiques différentes.
 % Vérifier que les prédicats inscrits sont bien ceux qui sont nécessaires en public
-:- module(eval, [evalJeu/5, evalTest1/2, calculGauche/5, calculDroite/5, calculLigne/4, calculHaut/4, calculBas/5, calculColonne/4, calculDiagGaucheDroite/4, calculDiagDroiteGauche/4]).
+:- module(eval, [evalJeu/5, evalTest1/2, calculGauche/5, calculDroite/5, calculLigne/4, calculHaut/4, calculBas/5, calculColonne/4, calculDiagGaucheDroite/4, calculDiagDroiteGauche/4, combinaison/5]).
 
 %%%%%%%%%%%%%%%%
 %% Inclusions %%
@@ -24,11 +24,12 @@
 evalJeu(JoueurCourant,AutreJoueur,X,Y,Score) :-
 	assert(caseTest(X,Y,JoueurCourant)),
 	assert(ennemiTest(AutreJoueur)),
-	poidsPuissance3(PoidsPuissance3), poidsPosition(PoidsPosition), poidsDensite(PoidsDensite), poidsAdjacence(PoidsAdjacence),
+	poidsPuissance3(PoidsPuissance3), poidsPosition(PoidsPosition), poidsDensite(PoidsDensite), poidsAdjacence(PoidsAdjacence),poidsCombinaison(PoidsCombinaison),
 	evalPosition(JoueurCourant,Score1,PoidsPosition),
 	evalPuissances3(JoueurCourant,AutreJoueur,Score2,PoidsPuissance3),
 	densite(JoueurCourant,Score3,PoidsDensite),
 	evalAdjacence(X,Y,_,Score4, PoidsAdjacence),
+	combinaison(X,Y,JoueurCourant,Score5,PoidsCombinaison),
 	retract(caseTest(X,Y,JoueurCourant)),
 	retract(ennemiTest(AutreJoueur)),
 	random_between(-2,2,Perturbation),
@@ -36,6 +37,7 @@ evalJeu(JoueurCourant,AutreJoueur,X,Y,Score) :-
 			+ Score2 * PoidsPuissance3
 			+ Score3
 			+ Score4
+			+ Score5 * PoidsCombinaison
 			+ Perturbation.
 
 %%%%%%%%%%%%%%%%%%%%%%
