@@ -42,3 +42,20 @@ Execution Time : 5 ms.
 Nb de thread actifs : 2
 CpuTime : 0.4718631 s
 
+Exécution du test avec les statistiques suivantes : 
+Match de IA1 : IA Minimax 3 - eval Position contre IA2 : IA Minimax 3 - eval Position+Puissance3
+IA Minimax 3 - eval Position+Puissance3 en commençant : a gagné 0 fois et a perdu 1 fois.
+IA Minimax 3 - eval Position en commençant : a gagné 1 fois et a perdu 0 fois.
+Il y a eu 0 égalites pour IA2
+Il y a eu 0 egalites pour IA1Exécution du test avec les statistiques suivantes : 
+Match de IA1 : IA Minimax 3 - eval Position contre IA2 : IA Minimax 3 - eval Position+Puissance3
+IA Minimax 3 - eval Position+Puissance3 en commençant : a gagné 0 fois et a perdu 0 fois.
+IA Minimax 3 - eval Position en commençant : a gagné 0 fois et a perdu 1 fois.
+Il y a eu 1 égalites pour IA2
+Il y a eu 0 egalites pour IA1
+Temps moyen par coups pour IA1 : 58 ms
+Temps moyen par coups pour IA2 : 54.945454545454545 ms
+Execution Time : 2957 ms.
+Nb de thread actifs : 2
+CpuTime : 6.9196335 s
+
