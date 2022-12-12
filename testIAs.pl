@@ -22,27 +22,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%
 
 % runTest/3
-% NbIterations: le nombre de parties à jouer,
-% IA1 et IA2 : les identifiants des 2 IA à confronter
-% IA1 joue contre IA2 "NbIterations" fois le predicat affiche combien de fois qui a battu qui
-runTest(NbIterations,IA1,IA2) :-
-	NbIterationsParIA is NbIterations//2,
-	runTestIAXEnPremier(NbIterationsParIA,IA1,IA2,0,NbFoisIA1GagneEnCommencant,0,NbFoisIA1PerdEnCommencant,0,NbEgaliteIA1),
-	runTestIAXEnPremier(NbIterationsParIA,IA2,IA1,0,NbFoisIA2GagneEnCommencant,0,NbFoisIA2PerdEnCommencant,0,NbEgaliteIA2),
-	typeJoueur(IA1,TypeIA1),
-	typeJoueur(IA2,TypeIA2),
 
-	% write(Stream, TypeIA2), write(Stream, ' en commençant : a gagné '), write(Stream, NbFoisIA2GagneEnCommencant),write(Stream, ' fois et a perdu '),write(Stream, NbFoisIA2PerdEnCommencant),write(Stream, ' fois.\n'),
-	% write(Stream, TypeIA1), write(Stream, ' en commençant : a gagné '), write(Stream, NbFoisIA1GagneEnCommencant),write(Stream, ' fois et a perdu '),write(Stream, NbFoisIA1PerdEnCommencant),write(Stream, ' fois.\n'),
-	
-	write(TypeIA2), write(' en commençant : a gagné '), write(NbFoisIA2GagneEnCommencant),write(' fois et a perdu '),write(NbFoisIA2PerdEnCommencant),write(' fois.'),
-	nl,
-	write('Il y a eu '), write(NbEgaliteIA2),write(' egalites pour IA2'),nl,
-	write(TypeIA1), write(' en commençant : a gagné '), write(NbFoisIA1GagneEnCommencant),write(' fois et a perdu '),write(NbFoisIA1PerdEnCommencant),write(' fois.'),nl,
-	write('Il y a eu '), write(NbEgaliteIA1),write(' egalites pour IA1'),
-	!.
-
-runTest2(NbIterations,IA1,IA2) :-
+runTestWithComments(NbIterations,IA1,IA2) :-
 	NbIterationsParIA is NbIterations//2,
 
 	%Mise à zéro du temps écoulé pour les joueurs ainsi que leurs nombres de coups.
@@ -82,7 +63,7 @@ runTest2(NbIterations,IA1,IA2) :-
 	close(Stream),
 	!.
 
-runTest3(NbIterations,IA1,IA2) :-
+runTestSimple(NbIterations,IA1,IA2) :-
 		NbIterationsParIA is NbIterations//2,
 	
 		%Mise à zéro du temps écoulé pour les joueurs ainsi que leurs nombres de coups.
@@ -97,33 +78,14 @@ runTest3(NbIterations,IA1,IA2) :-
 		runTestIAXEnPremier(NbIterationsParIA,IA2,IA1,0,NbFoisIA2GagneEnCommencant,0,NbFoisIA2PerdEnCommencant,0,NbEgaliteIA2),
 		!.
 
-%Run test with time(:Goal) to see the time it takes to run the test
-% runTestWithTime(NbIterations,IA1,IA2) :-
-% 	time(runTest(NbIterations,IA1,IA2)).
-
-%Run test with two similar IAs to find the mean time it takes to play a game
-runTestWithTimeForMean(NbIterations,IA1,IA2) :-
-	time(runTestForMean(NbIterations,IA1,IA2)).
-	
-% Run test with two similar IAs to find the mean time it takes to play a game
-% Pour l'instant, c'est juste le temps moyen d'une IA, il faut faire le temps au cours d'une partie pour chaque IA
-runTestForMean(NbIterations,IA1,IA2) :-
-	statistics,
-	statistics(walltime, [Start,_]),
-	runTest(NbIterations,IA1,IA2),
-	statistics(walltime, [End,_]),
-	Time is End - Start,
-	MeanTime is Time/NbIterations,
-	write('\nMean time for one game : '), write(MeanTime), write(' ms'), nl.
-
 runTestStat() :-
 	%lance pour chaque IA1 et IA2 le test avec 20 parties
-	% runTestWithTime(20,2,3),
-	% runTestWithTime(20,2,4),
-	% runTestWithTime(20,2,5),
-	% runTestWithTime(20,2,6),
-	% runTestWithTime(20,2,7),
-	% runTestWithTime(20,2,8).
+	runTestWithTime(20,2,3),
+	runTestWithTime(20,2,4),
+	runTestWithTime(20,2,5),
+	runTestWithTime(20,2,6),
+	runTestWithTime(20,2,7),
+	runTestWithTime(20,2,8),
 	runTestWithTime(20,3,4),
 	runTestWithTime(20,3,5),
 	runTestWithTime(20,3,6),
@@ -137,7 +99,7 @@ runTestWithTime(NbIterations,IA1,IA2) :-
 
 	statistics,
 	statistics(walltime, [Start,_]),
-	runTest3(NbIterations,IA1,IA2),
+	runTestSimple(NbIterations,IA1,IA2),
 	statistics(walltime, [End,_]),
 	Time is End - Start,
 	
@@ -162,18 +124,10 @@ runTestWithTime(NbIterations,IA1,IA2) :-
 runTestWithStatisticsShort(NbIterations,IA1,IA2) :-
 	%ouverture fichier et initialisation message
 	open('result2.txt',append,Stream),
-	% write(Stream,'Exécution du test avec les statistiques suivantes : '),
-	% %description de l'IA1 et de l'IA2
-	% write(Stream,'\nMatch de IA1 : '),
-	% typeJoueur(IA1,TypeIA1),
-	% write(Stream,TypeIA1),
-	% write(Stream,' contre IA2 : '),
-	% typeJoueur(IA2,TypeIA2),
-	% write(Stream,TypeIA2),
 	
 	statistics,
 	statistics(walltime, [Start,_]),
-	runTest2(NbIterations,IA1,IA2),
+	runTestWithComments(NbIterations,IA1,IA2),
 	statistics(walltime, [End,_]),
 	Time is End - Start,
 
