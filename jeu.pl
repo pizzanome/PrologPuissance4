@@ -37,6 +37,8 @@ typeJoueur(3,'IA Minimax 3 - eval Position').
 typeJoueur(4,'IA Minimax 3 - eval Position+Puissance3').
 typeJoueur(5,'IA Minimax 4 - eval Position').
 typeJoueur(6,'IA Minimax 4 - eval Position+Puissance3').
+
+%%% AJOUT : Modification des IA 7 et 8 pour prendre en compte la nouvelle heuristique %%%
 typeJoueur(7,'IA Minimax 3 - eval combinaison').
 typeJoueur(8,'IA Minimax 4 - eval combinaison').
 

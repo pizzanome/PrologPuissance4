@@ -1,4 +1,6 @@
 ﻿%%%%%%%%%%%% testIAs.pl %%%%%%%%%%%%
+%%%%% Partie améliorée par l'hexanome %%%%%%%%%%%%%%%%%%%%%%%%
+
 % Permet de tester comment performent différentes IAs lorsqu elles jouent l'une contre l'autre.
 
 %%%%%%%%%%%%%%%%
@@ -92,7 +94,7 @@ runTestStat() :-
 	runTestWithTime(20,3,7),
 	runTestWithTime(20,3,8).
 
-%Run test with statistics(:Goal) and shown the output of the statistics : thread_cputime, cputime, trail, process_epoch, memory into the result.txt
+%Run test with time and write the result in a file
 runTestWithTime(NbIterations,IA1,IA2) :-
 	%ouverture fichier et initialisation message
 	open('timeT.txt',append,Stream),
@@ -120,7 +122,7 @@ runTestWithTime(NbIterations,IA1,IA2) :-
 	write(Stream, NbCoupsIA2), write(Stream, " coups comptabilisés\n\n"),
 	close(Stream).
 
-%Run test with statistics(:Goal) and shown the output of the statistics : thread_cputime, cputime, trail, process_epoch, memory into the result.txt
+%Run test with statistics(:Goal) and shown the output of the statistics
 runTestWithStatisticsShort(NbIterations,IA1,IA2) :-
 	%ouverture fichier et initialisation message
 	open('result2.txt',append,Stream),
