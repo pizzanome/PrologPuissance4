@@ -191,7 +191,7 @@ tour(PartieNulle) :-
 	statistics(walltime, [End,_]),
 	Time is End - Start,
 
-	%Mesurer le temps de jeu du tour et incrémenter le nombre de coups de 1
+	%Incrémente le temps total pour l'IA du temps de ce tour et incrémente le nombre de coups de 1
 	tempsJoueur(TypeJoueur, TempsAncien),
 	nbCoups(TypeJoueur, NbCoupsAncien),
 	TempsNouveau is TempsAncien + Time,
