@@ -1,3 +1,13 @@
+//////////////////////
+Pour générer ces résultats, utiliser la méthode suivante : 
+runTestWithTime(NbIterations,IA1,IA2)
+Avec IA1 et IA2, les IA suivantes :
+- 2 : 'IA Aléatoire'
+- 3 : 'IA Minimax 3 - eval Position'
+- 4 : 'IA Minimax 3 - eval Position+Puissance3'
+- 5 : 'IA Minimax 4 - eval Position'
+- 6 : 'IA Minimax 4 - eval Position+Puissance3'
+//////////////////////
 IA Aléatoire : 0.015503875968992248 ms
 129 coups comptabilisés
 IA Minimax 3 - eval Position : 40.064748201438846 ms
@@ -52,4 +62,14 @@ IA Minimax 3 - eval Position : 28.759336099585063 ms
 241 coups comptabilisés
 IA Minimax 4 - eval combinaison : 353.40485829959516 ms
 247 coups comptabilisés
+
+IA Minimax 3 - eval Position : 25.794871794871796 ms
+39 coups comptabilisés
+IA Minimax 3 - eval Position+Puissance3 : 26.81578947368421 ms
+38 coups comptabilisés
+
+IA Minimax 3 - eval Position : 30.20408163265306 ms
+49 coups comptabilisés
+IA Minimax 3 - eval Position+Puissance3 : 30.591836734693878 ms
+49 coups comptabilisés
 
